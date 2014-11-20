@@ -366,6 +366,7 @@ host_installation_order.each do |host_instance|
   host_puppet_config          = @puppet_global_config.clone
   host_puppet_config['roles'] = components_list(host_instance)
   host_puppet_config['conf_node_external_eth_dev'] = host_instance.ip_interface
+  host_puppet_config['node_ip_addr'] = host_instance.ip_addr
 
   # Broker specific config
   if host_instance.is_broker?
@@ -378,7 +379,6 @@ host_installation_order.each do |host_instance|
   # Node specific config
   if host_instance.is_node?
      host_puppet_config['node_hostname'] = host_instance.host
-     host_puppet_config['node_ip_addr'] = host_instance.ip_addr
   end
 
   # Set usernames/passwords
